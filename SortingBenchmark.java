@@ -157,22 +157,22 @@ public class SortingBenchmark {
     // =====================================================================
 
     /** غير مرتبة: أعداد عشوائية تماماً */
-    static int[] generateRandom(Random rnd) {
+    static int[] Random(Random rnd) {
         int[] a = new int[N];
         for (int i = 0; i < N; i++) a[i] = rnd.nextInt(1_000_000);
         return a;
     }
 
     /** مرتبة تماماً: من الأصغر إلى الأكبر */
-    static int[] generateSorted(Random rnd) {
+    static int[] Sorted(Random rnd) {
         int[] a = generateRandom(rnd);
         Arrays.sort(a);
         return a;
     }
 
     /** مرتبة عكسياً: من الأكبر إلى الأصغر */
-    static int[] generateReversed(Random rnd) {
-        int[] a = generateSorted(rnd);
+    static int[] Reversed(Random rnd) {
+        int[] a = Sorted(rnd);
         for (int i = 0, j = a.length - 1; i < j; i++, j--) {
             swap(a, i, j);
         }
@@ -180,8 +180,8 @@ public class SortingBenchmark {
     }
 
     /** مرتبة جزئياً بنسبة 80%: نرتب المصفوفة ثم نبعثر 20% من العناصر عشوائياً */
-    static int[] generatePartiallySorted(Random rnd) {
-        int[] a = generateSorted(rnd);
+    static int[] PartiallySorted(Random rnd) {
+        int[] a = Sorted(rnd);
         int scrambleCount = (int) (N * 0.20);       // 20,000 عنصر
         int[] positions = new int[scrambleCount];
         // اختيار مواضع عشوائية متفرقة
@@ -252,10 +252,10 @@ public class SortingBenchmark {
 
         // توليد بيانات الحالات الأربع مرة واحدة (وقت التوليد لا يُقاس)
         int[][] testCases = {
-            generateRandom(rnd),
-            generateReversed(rnd),
-            generatePartiallySorted(rnd),
-            generateSorted(rnd)
+            Random(rnd),
+            Reversed(rnd),
+            PartiallySorted(rnd),
+            Sorted(rnd)
         };
 
         String[] algorithms = {
